@@ -1,6 +1,8 @@
+import caffe
 from caffe import layers as L, params as P, to_proto
 from caffe.proto import caffe_pb2
 
+# essential implements of densenet, think twice before modify anything
 def bn_relu_conv(bottom, ks, nout, stride, pad, dropout):
     batch_norm = L.BatchNorm(bottom, in_place=False, param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
     scale = L.Scale(batch_norm, bias_term=True, in_place=True, filler=dict(value=1), bias_filler=dict(value=0))
@@ -119,7 +121,6 @@ def make_solver(batch_size, epoch_mult, train_sam, test_sam):
     print(s)
     with open(solver_dir, 'w') as f:
         f.write(str(s))
-
 
 if __name__ == '__main__':
     # the path of data
