@@ -1,0 +1,1 @@
+caffe train --solver=/data/lixinpeng/DenseNet_Cifar100_Caffe/solver.prototxt --gpu=1 &>./dense40.log&
