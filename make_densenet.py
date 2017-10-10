@@ -3,9 +3,6 @@ from caffe import layers as L, params as P, to_proto
 from caffe.proto import caffe_pb2
 import caffe
 
-
-
-
 def bn_relu_conv(bottom, ks, nout, stride, pad, dropout):
     if split == 'train':
         # \u8bad\u7ec3\u7684\u65f6\u5019\u6211\u4eec\u5bf9 BN \u7684\u53c2\u6570\u53d6\u6ed1\u52a8\u5e73\u5747\uff0c\u8bbe\u7f6euse_global_stats = False
