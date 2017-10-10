@@ -120,6 +120,7 @@ def make_solver(batch_size, epoch_mult, train_sam, test_sam):
     with open(solver_dir, 'w') as f:
         f.write(str(s))
 
+
 if __name__ == '__main__':
     # the path of data
     train_file = '/data/lixinpeng/DataBase/cifar100/cifar100_train_lmdb'
