@@ -1,28 +1,17 @@
-from __future__ import print_function
 from caffe import layers as L, params as P, to_proto
 from caffe.proto import caffe_pb2
-import caffe
 
 def bn_relu_conv(bottom, ks, nout, stride, pad, dropout):
-    if split == 'train':
-        # \u8bad\u7ec3\u7684\u65f6\u5019\u6211\u4eec\u5bf9 BN \u7684\u53c2\u6570\u53d6\u6ed1\u52a8\u5e73\u5747\uff0c\u8bbe\u7f6euse_global_stats = False
-        batch_norm = L.BatchNorm(bottom, batch_norm_param=dict(use_global_stats = False), in_place=True, 
-					param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
-    else:
-        # \u6d4b\u8bd5\u7684\u65f6\u5019\u6211\u4eec\u76f4\u63a5\u662f\u6709\u8f93\u5165\u7684\u53c2\u6570\uff0c\u8bbe\u7f6euse_global_stats = True
-        batch_norm = L.BatchNorm(bottom, batch_norm_param=dict(use_global_stats = True), in_place = True, 
-					param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
-
+    batch_norm = L.BatchNorm(bottom, in_place=False, param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
     scale = L.Scale(batch_norm, bias_term=True, in_place=True, filler=dict(value=1), bias_filler=dict(value=0))
     relu = L.ReLU(scale, in_place=True)
-    conv = L.Convolution(relu, kernel_size=ks, stride=stride, num_output=nout, pad=pad, bias_term=True, 
-				weight_filler=dict(type='msra'), bias_filler=dict(type='constant'), 
-					param = [dict(lr_mult = 1, decay_mult = 1), dict(lr_mult = 2, decay_mult = 0)])
+    conv = L.Convolution(relu, kernel_size=ks, stride=stride, 
+                    num_output=nout, pad=pad, bias_term=False, weight_filler=dict(type='msra'), bias_filler=dict(type='constant'))
     if dropout>0:
         conv = L.Dropout(conv, dropout_ratio=dropout)
     return conv
 
-def add_layer(bottom, num_filter, dropout):
+def dense_block(bottom, num_filter, dropout):
     conv = bn_relu_conv(bottom, ks=3, nout=num_filter, stride=1, pad=1, dropout=dropout)
     concate = L.Concat(bottom, conv, axis=1)
     return concate
@@ -32,72 +21,92 @@ def transition(bottom, num_filter, dropout):
     pooling = L.Pooling(conv, pool=P.Pooling.AVE, kernel_size=2, stride=2)
     return pooling
 
+
 #change the line below to experiment with different setting
 #depth -- must be 3n+4
 #first_output -- #channels before entering the first dense block, set it to be comparable to growth_rate
 #growth_rate -- growth rate
 #dropout -- set to 0 to disable dropout, non-zero number to set dropout rate
-def densenet(data_file, mode='train', batch_size=64, depth=40, first_output=16, growth_rate=12, dropout=0.2):
-    
-    data, label = L.Data(source=data_file, backend=P.Data.LMDB, batch_size=batch_size, ntop=2, 
-              transform_param=dict(mean_file="/data/lixinpeng/DataBase/cifar100/mean.binaryproto"))
-
+def densenet(data_file=None, mode='train_test', batch_size=64, depth=40, first_output=16, growth_rate=12, dropout=0.2):
     nchannels = first_output
-    model = L.Convolution(data, kernel_size=3, stride=1, num_output=nchannels,
-                        pad=1, bias_term=True, weight_filler=dict(type='msra'), bias_filler=dict(type='constant'))
+    if mode == 'deploy':
+        # deploy.prototxt dont need data layer 
+        model = L.Convolution(bottom='data', kernel_size=3, stride=1, num_output=nchannels,
+                            pad=1, bias_term=False, weight_filler=dict(type='msra'), bias_filler=dict(type='constant'))
+    else:
+        data, label = L.Data(source=data_file, backend=P.Data.LMDB, batch_size=batch_size, ntop=2, 
+                transform_param=dict(mean_file=mean_file))
+        model = L.Convolution(data, kernel_size=3, stride=1, num_output=nchannels,
+                            pad=1, bias_term=False, weight_filler=dict(type='msra'), bias_filler=dict(type='constant'))
 
     N = (depth-4)/3
     for i in range(N):
-        model = add_layer(model, growth_rate, dropout)
+        model = dense_block(model, growth_rate, dropout)
         nchannels += growth_rate
     model = transition(model, nchannels, dropout)
 
     for i in range(N):
-        model = add_layer(model, growth_rate, dropout)
+        model = dense_block(model, growth_rate, dropout)
         nchannels += growth_rate
     model = transition(model, nchannels, dropout)
 
     for i in range(N):
-        model = add_layer(model, growth_rate, dropout)
+        model = dense_block(model, growth_rate, dropout)
         nchannels += growth_rate
 
-
-    model = L.BatchNorm(model, in_place=True, param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
+    model = L.BatchNorm(model, in_place=False, param=[dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0), dict(lr_mult=0, decay_mult=0)])
     model = L.Scale(model, bias_term=True, in_place=True, filler=dict(value=1), bias_filler=dict(value=0))
     model = L.ReLU(model, in_place=True)
     model = L.Pooling(model, pool=P.Pooling.AVE, global_pooling=True)
-    model = L.InnerProduct(model, num_output=100, bias_term=True, weight_filler=dict(type='msra'), bias_filler=dict(type='constant'))
-    loss = L.SoftmaxWithLoss(model, label)
-    accuracy = L.Accuracy(model, label)
-    return to_proto(loss, accuracy)
+    model = L.InnerProduct(model, num_output=10, bias_term=True, weight_filler=dict(type='xavier'), bias_filler=dict(type='constant'))
 
-def make_net():
-    split = 'train'
-    with open('train_densenet40.prototxt', 'w') as f:
-        #change the path to your data. If it's not lmdb format, also change first line of densenet() function
-	split = 'train'
-        print(str(densenet('/data/lixinpeng/DataBase/cifar100/cifar100_train_lmdb', batch_size=20)), file=f)
+    if mode == 'deploy':
+        prob = L.Softmax(model)
+        return to_proto(prob)
+    else:
+        loss = L.SoftmaxWithLoss(model, label)
+        accuracy = L.Accuracy(model, label)
+        return to_proto(loss, accuracy)
 
-    with open('test_densenet40.prototxt', 'w') as f:
-	split = 'test'
-        print(str(densenet('/data/lixinpeng/DataBase/cifar100/cifar100_test_lmdb', batch_size=20)), file=f)
+def make_net(name='Net'):
+    with open(train_dir, 'w') as f:
+        f.write('name:"{}"\n'.format(name))
+        f.write(str(densenet(data_file=train_file, mode='train', batch_size=64)))
 
-def make_solver():
+    with open(test_dir, 'w') as f:
+        f.write('name:"{}"\n'.format(name))
+        f.write(str(densenet(data_file=test_file, mode='test', batch_size=64)))
+
+    with open(deploy_dir, 'w') as f:
+        f.write('name:"{}"\n'.format(name))
+        f.write('input:"data"\n')
+        f.write('input_dim:1\n')
+        f.write('input_dim:3\n')
+        f.write('input_dim:32\n')
+        f.write('input_dim:32\n')
+        f.write(str(densenet(mode='deploy')))
+
+def make_solver(batch_size, epoch_mult, train_sam, test_sam):
+    epoch = int(train_sam/batch_size)+1
+    max_iter = epoch*epoch_mult
+    test_iter = int(test_sam/batch_size)+1
+    test_interval = epoch
+
     s = caffe_pb2.SolverParameter()
     s.random_seed = 0xCAFFE
 
-    s.train_net = './train_densenet40.prototxt'
-    s.test_net.append('./test_densenet40.prototxt')
-    s.test_interval = 5000
-    s.test_iter.append(500)
+    s.train_net = train_dir
+    s.test_net.append(test_dir)
+    s.test_interval = test_interval
+    s.test_iter.append(test_iter)
 
-    s.max_iter = 100000	#40 epochs for cifar100, 90 epochs for imagenet
+    s.max_iter = max_iter
     s.type = 'Nesterov'
-    s.display = 1
+    s.display = epoch
 
-    s.base_lr = 0.1
-    s.momentum = 0.9
-    s.weight_decay = 1e-4
+    s.base_lr =  0.1
+    s.momentum = round(0.9,2)
+    s.weight_decay = round(1e-4,5)
 
     s.lr_policy='multistep'
     s.gamma = 0.1
@@ -107,13 +116,22 @@ def make_solver():
 
     s.snapshot=5000
     s.snapshot_prefix='./snap/cifar100_dense40'
-
-    solver_path = './solver.prototxt'
-    with open(solver_path, 'w') as f:
+    print(s)
+    with open(solver_dir, 'w') as f:
         f.write(str(s))
 
 if __name__ == '__main__':
+    # the path of data
+    train_file = '/data/lixinpeng/DataBase/cifar100/cifar100_train_lmdb'
+    test_file = '/data/lixinpeng/DataBase/cifar100/cifar100_test_lmdb'
+    mean_file = "/data/lixinpeng/DataBase/cifar100/mean.binaryproto"
+    # the path of prototxt
+    train_dir = './train_densenet40.prototxt'
+    test_dir = './test_densenet40.prototxt'
+    deploy_dir = './deploy_densenet40.prototxt'
+    solver_dir = './densenet_solver.prototxt'
 
-    make_net()
-    make_solver()
+    make_net(name='densenet40')
+    make_solver(batch_size=64, epoch_mult=300, train_sam=50000, test_sam=10000)
 
+    print('ok!')
