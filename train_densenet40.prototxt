@@ -78,7 +78,7 @@ layer {
   top: "Convolution2"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -155,7 +155,7 @@ layer {
   top: "Convolution3"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -232,7 +232,7 @@ layer {
   top: "Convolution4"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -309,7 +309,7 @@ layer {
   top: "Convolution5"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -386,7 +386,7 @@ layer {
   top: "Convolution6"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -463,7 +463,7 @@ layer {
   top: "Convolution7"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -540,7 +540,7 @@ layer {
   top: "Convolution8"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -617,7 +617,7 @@ layer {
   top: "Convolution9"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -694,7 +694,7 @@ layer {
   top: "Convolution10"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -771,7 +771,7 @@ layer {
   top: "Convolution11"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -848,7 +848,7 @@ layer {
   top: "Convolution12"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -925,7 +925,7 @@ layer {
   top: "Convolution13"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1002,7 +1002,7 @@ layer {
   top: "Convolution14"
   convolution_param {
     num_output: 160
-    bias_term: false
+    bias_term: true
     pad: 0
     kernel_size: 1
     stride: 1
@@ -1080,7 +1080,7 @@ layer {
   top: "Convolution15"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1157,7 +1157,7 @@ layer {
   top: "Convolution16"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1234,7 +1234,7 @@ layer {
   top: "Convolution17"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1311,7 +1311,7 @@ layer {
   top: "Convolution18"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1388,7 +1388,7 @@ layer {
   top: "Convolution19"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1465,7 +1465,7 @@ layer {
   top: "Convolution20"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1542,7 +1542,7 @@ layer {
   top: "Convolution21"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1619,7 +1619,7 @@ layer {
   top: "Convolution22"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1696,7 +1696,7 @@ layer {
   top: "Convolution23"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1773,7 +1773,7 @@ layer {
   top: "Convolution24"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1850,7 +1850,7 @@ layer {
   top: "Convolution25"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -1927,7 +1927,7 @@ layer {
   top: "Convolution26"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2004,7 +2004,7 @@ layer {
   top: "Convolution27"
   convolution_param {
     num_output: 304
-    bias_term: false
+    bias_term: true
     pad: 0
     kernel_size: 1
     stride: 1
@@ -2082,7 +2082,7 @@ layer {
   top: "Convolution28"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2159,7 +2159,7 @@ layer {
   top: "Convolution29"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2236,7 +2236,7 @@ layer {
   top: "Convolution30"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2313,7 +2313,7 @@ layer {
   top: "Convolution31"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2390,7 +2390,7 @@ layer {
   top: "Convolution32"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2467,7 +2467,7 @@ layer {
   top: "Convolution33"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2544,7 +2544,7 @@ layer {
   top: "Convolution34"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2621,7 +2621,7 @@ layer {
   top: "Convolution35"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2698,7 +2698,7 @@ layer {
   top: "Convolution36"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2775,7 +2775,7 @@ layer {
   top: "Convolution37"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2852,7 +2852,7 @@ layer {
   top: "Convolution38"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -2929,7 +2929,7 @@ layer {
   top: "Convolution39"
   convolution_param {
     num_output: 12
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
