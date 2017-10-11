@@ -60,7 +60,7 @@ def densenet(data_file=None, mode='train_test', batch_size=64, depth=40, first_o
     model = L.Scale(model, bias_term=True, in_place=True, filler=dict(value=1), bias_filler=dict(value=0))
     model = L.ReLU(model, in_place=True)
     model = L.Pooling(model, pool=P.Pooling.AVE, global_pooling=True)
-    model = L.InnerProduct(model, num_output=10, bias_term=True, weight_filler=dict(type='xavier'), bias_filler=dict(type='constant'))
+    model = L.InnerProduct(model, num_output=100, bias_term=True, weight_filler=dict(type='xavier'), bias_filler=dict(type='constant'))
 
     if mode == 'deploy':
         prob = L.Softmax(model)

@@ -3015,7 +3015,7 @@ layer {
   bottom: "Pooling3"
   top: "InnerProduct1"
   inner_product_param {
-    num_output: 10
+    num_output: 100
     bias_term: true
     weight_filler {
       type: "xavier"
