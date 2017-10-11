@@ -104,7 +104,7 @@ def make_solver(batch_size, epoch_mult, train_sam, test_sam):
 
     s.max_iter = max_iter
     s.type = 'Nesterov'
-    s.display = epoch
+    s.display = int(epoch/5)
 
     s.base_lr =  0.1
     s.momentum = round(0.9,2)

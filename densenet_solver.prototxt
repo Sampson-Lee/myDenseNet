@@ -3,7 +3,7 @@ test_net: "./test_densenet40.prototxt"
 test_iter: 157
 test_interval: 782
 base_lr: 0.10000000149
-display: 782
+display: 156
 max_iter: 234600
 lr_policy: "multistep"
 gamma: 0.10000000149
