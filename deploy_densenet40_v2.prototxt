@@ -1,26 +1,17 @@
 name:"densenet40"
-layer {
-  name: "Data1"
-  type: "Data"
-  top: "Data1"
-  top: "Data2"
-  transform_param {
-    mean_file: "/data/lixinpeng/DataBase/cifar100/mean.binaryproto"
-  }
-  data_param {
-    source: "/data/lixinpeng/DataBase/cifar100/cifar100_train_lmdb"
-    batch_size: 64
-    backend: LMDB
-  }
-}
+input:"data"
+input_dim:1
+input_dim:3
+input_dim:32
+input_dim:32
 layer {
   name: "Convolution1"
   type: "Convolution"
-  bottom: "Data1"
+  bottom: "data"
   top: "Convolution1"
   convolution_param {
     num_output: 16
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 1
@@ -37,18 +28,6 @@ layer {
   type: "BatchNorm"
   bottom: "Convolution1"
   top: "BatchNorm1"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale1"
@@ -57,11 +36,11 @@ layer {
   top: "BatchNorm1"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -96,7 +75,7 @@ layer {
   bottom: "Convolution2"
   top: "Dropout1"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -114,18 +93,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat1"
   top: "BatchNorm2"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale2"
@@ -134,11 +101,11 @@ layer {
   top: "BatchNorm2"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -173,7 +140,7 @@ layer {
   bottom: "Convolution3"
   top: "Dropout2"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -191,18 +158,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat2"
   top: "BatchNorm3"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale3"
@@ -211,11 +166,11 @@ layer {
   top: "BatchNorm3"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -250,7 +205,7 @@ layer {
   bottom: "Convolution4"
   top: "Dropout3"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -268,18 +223,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat3"
   top: "BatchNorm4"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale4"
@@ -288,11 +231,11 @@ layer {
   top: "BatchNorm4"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -327,7 +270,7 @@ layer {
   bottom: "Convolution5"
   top: "Dropout4"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -345,18 +288,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat4"
   top: "BatchNorm5"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale5"
@@ -365,11 +296,11 @@ layer {
   top: "BatchNorm5"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -404,7 +335,7 @@ layer {
   bottom: "Convolution6"
   top: "Dropout5"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -422,18 +353,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat5"
   top: "BatchNorm6"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale6"
@@ -442,11 +361,11 @@ layer {
   top: "BatchNorm6"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -481,7 +400,7 @@ layer {
   bottom: "Convolution7"
   top: "Dropout6"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -499,18 +418,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat6"
   top: "BatchNorm7"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale7"
@@ -519,11 +426,11 @@ layer {
   top: "BatchNorm7"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -558,7 +465,7 @@ layer {
   bottom: "Convolution8"
   top: "Dropout7"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -576,18 +483,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat7"
   top: "BatchNorm8"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale8"
@@ -596,11 +491,11 @@ layer {
   top: "BatchNorm8"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -635,7 +530,7 @@ layer {
   bottom: "Convolution9"
   top: "Dropout8"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -653,18 +548,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat8"
   top: "BatchNorm9"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale9"
@@ -673,11 +556,11 @@ layer {
   top: "BatchNorm9"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -712,7 +595,7 @@ layer {
   bottom: "Convolution10"
   top: "Dropout9"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -730,18 +613,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat9"
   top: "BatchNorm10"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale10"
@@ -750,11 +621,11 @@ layer {
   top: "BatchNorm10"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -789,7 +660,7 @@ layer {
   bottom: "Convolution11"
   top: "Dropout10"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -807,18 +678,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat10"
   top: "BatchNorm11"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale11"
@@ -827,11 +686,11 @@ layer {
   top: "BatchNorm11"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -866,7 +725,7 @@ layer {
   bottom: "Convolution12"
   top: "Dropout11"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -884,18 +743,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat11"
   top: "BatchNorm12"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale12"
@@ -904,11 +751,11 @@ layer {
   top: "BatchNorm12"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -943,7 +790,7 @@ layer {
   bottom: "Convolution13"
   top: "Dropout12"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -961,18 +808,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat12"
   top: "BatchNorm13"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale13"
@@ -981,11 +816,11 @@ layer {
   top: "BatchNorm13"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1020,7 +855,7 @@ layer {
   bottom: "Convolution14"
   top: "Dropout13"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1039,18 +874,6 @@ layer {
   type: "BatchNorm"
   bottom: "Pooling1"
   top: "BatchNorm14"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale14"
@@ -1059,11 +882,11 @@ layer {
   top: "BatchNorm14"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1098,7 +921,7 @@ layer {
   bottom: "Convolution15"
   top: "Dropout14"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1116,18 +939,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat13"
   top: "BatchNorm15"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale15"
@@ -1136,11 +947,11 @@ layer {
   top: "BatchNorm15"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1175,7 +986,7 @@ layer {
   bottom: "Convolution16"
   top: "Dropout15"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1193,18 +1004,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat14"
   top: "BatchNorm16"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale16"
@@ -1213,11 +1012,11 @@ layer {
   top: "BatchNorm16"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1252,7 +1051,7 @@ layer {
   bottom: "Convolution17"
   top: "Dropout16"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1270,18 +1069,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat15"
   top: "BatchNorm17"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale17"
@@ -1290,11 +1077,11 @@ layer {
   top: "BatchNorm17"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1329,7 +1116,7 @@ layer {
   bottom: "Convolution18"
   top: "Dropout17"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1347,18 +1134,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat16"
   top: "BatchNorm18"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale18"
@@ -1367,11 +1142,11 @@ layer {
   top: "BatchNorm18"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1406,7 +1181,7 @@ layer {
   bottom: "Convolution19"
   top: "Dropout18"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1424,18 +1199,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat17"
   top: "BatchNorm19"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale19"
@@ -1444,11 +1207,11 @@ layer {
   top: "BatchNorm19"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1483,7 +1246,7 @@ layer {
   bottom: "Convolution20"
   top: "Dropout19"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1501,18 +1264,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat18"
   top: "BatchNorm20"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale20"
@@ -1521,11 +1272,11 @@ layer {
   top: "BatchNorm20"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1560,7 +1311,7 @@ layer {
   bottom: "Convolution21"
   top: "Dropout20"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1578,18 +1329,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat19"
   top: "BatchNorm21"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale21"
@@ -1598,11 +1337,11 @@ layer {
   top: "BatchNorm21"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1637,7 +1376,7 @@ layer {
   bottom: "Convolution22"
   top: "Dropout21"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1655,18 +1394,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat20"
   top: "BatchNorm22"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale22"
@@ -1675,11 +1402,11 @@ layer {
   top: "BatchNorm22"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1714,7 +1441,7 @@ layer {
   bottom: "Convolution23"
   top: "Dropout22"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1732,18 +1459,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat21"
   top: "BatchNorm23"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale23"
@@ -1752,11 +1467,11 @@ layer {
   top: "BatchNorm23"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1791,7 +1506,7 @@ layer {
   bottom: "Convolution24"
   top: "Dropout23"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1809,18 +1524,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat22"
   top: "BatchNorm24"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale24"
@@ -1829,11 +1532,11 @@ layer {
   top: "BatchNorm24"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1868,7 +1571,7 @@ layer {
   bottom: "Convolution25"
   top: "Dropout24"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1886,18 +1589,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat23"
   top: "BatchNorm25"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale25"
@@ -1906,11 +1597,11 @@ layer {
   top: "BatchNorm25"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -1945,7 +1636,7 @@ layer {
   bottom: "Convolution26"
   top: "Dropout25"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -1963,18 +1654,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat24"
   top: "BatchNorm26"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale26"
@@ -1983,11 +1662,11 @@ layer {
   top: "BatchNorm26"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2022,7 +1701,7 @@ layer {
   bottom: "Convolution27"
   top: "Dropout26"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2041,18 +1720,6 @@ layer {
   type: "BatchNorm"
   bottom: "Pooling2"
   top: "BatchNorm27"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale27"
@@ -2061,11 +1728,11 @@ layer {
   top: "BatchNorm27"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2100,7 +1767,7 @@ layer {
   bottom: "Convolution28"
   top: "Dropout27"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2118,18 +1785,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat25"
   top: "BatchNorm28"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale28"
@@ -2138,11 +1793,11 @@ layer {
   top: "BatchNorm28"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2177,7 +1832,7 @@ layer {
   bottom: "Convolution29"
   top: "Dropout28"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2195,18 +1850,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat26"
   top: "BatchNorm29"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale29"
@@ -2215,11 +1858,11 @@ layer {
   top: "BatchNorm29"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2254,7 +1897,7 @@ layer {
   bottom: "Convolution30"
   top: "Dropout29"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2272,18 +1915,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat27"
   top: "BatchNorm30"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale30"
@@ -2292,11 +1923,11 @@ layer {
   top: "BatchNorm30"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2331,7 +1962,7 @@ layer {
   bottom: "Convolution31"
   top: "Dropout30"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2349,18 +1980,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat28"
   top: "BatchNorm31"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale31"
@@ -2369,11 +1988,11 @@ layer {
   top: "BatchNorm31"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2408,7 +2027,7 @@ layer {
   bottom: "Convolution32"
   top: "Dropout31"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2426,18 +2045,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat29"
   top: "BatchNorm32"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale32"
@@ -2446,11 +2053,11 @@ layer {
   top: "BatchNorm32"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2485,7 +2092,7 @@ layer {
   bottom: "Convolution33"
   top: "Dropout32"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2503,18 +2110,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat30"
   top: "BatchNorm33"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale33"
@@ -2523,11 +2118,11 @@ layer {
   top: "BatchNorm33"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2562,7 +2157,7 @@ layer {
   bottom: "Convolution34"
   top: "Dropout33"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2580,18 +2175,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat31"
   top: "BatchNorm34"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale34"
@@ -2600,11 +2183,11 @@ layer {
   top: "BatchNorm34"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2639,7 +2222,7 @@ layer {
   bottom: "Convolution35"
   top: "Dropout34"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2657,18 +2240,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat32"
   top: "BatchNorm35"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale35"
@@ -2677,11 +2248,11 @@ layer {
   top: "BatchNorm35"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2716,7 +2287,7 @@ layer {
   bottom: "Convolution36"
   top: "Dropout35"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2734,18 +2305,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat33"
   top: "BatchNorm36"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale36"
@@ -2754,11 +2313,11 @@ layer {
   top: "BatchNorm36"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2793,7 +2352,7 @@ layer {
   bottom: "Convolution37"
   top: "Dropout36"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2811,18 +2370,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat34"
   top: "BatchNorm37"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale37"
@@ -2831,11 +2378,11 @@ layer {
   top: "BatchNorm37"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2870,7 +2417,7 @@ layer {
   bottom: "Convolution38"
   top: "Dropout37"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2888,18 +2435,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat35"
   top: "BatchNorm38"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale38"
@@ -2908,11 +2443,11 @@ layer {
   top: "BatchNorm38"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -2947,7 +2482,7 @@ layer {
   bottom: "Convolution39"
   top: "Dropout38"
   dropout_param {
-    dropout_ratio: 0.20000000298
+    dropout_ratio: 0.2
   }
 }
 layer {
@@ -2965,18 +2500,6 @@ layer {
   type: "BatchNorm"
   bottom: "Concat36"
   top: "BatchNorm39"
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
-  param {
-    lr_mult: 0.0
-    decay_mult: 0.0
-  }
 }
 layer {
   name: "Scale39"
@@ -2985,11 +2508,11 @@ layer {
   top: "BatchNorm39"
   scale_param {
     filler {
-      value: 1.0
+      value: 1
     }
     bias_term: true
     bias_filler {
-      value: 0.0
+      value: 0
     }
   }
 }
@@ -3026,16 +2549,8 @@ layer {
   }
 }
 layer {
-  name: "SoftmaxWithLoss1"
-  type: "SoftmaxWithLoss"
+  name: "Softmax1"
+  type: "Softmax"
   bottom: "InnerProduct1"
-  bottom: "Data2"
-  top: "SoftmaxWithLoss1"
-}
-layer {
-  name: "Accuracy1"
-  type: "Accuracy"
-  bottom: "InnerProduct1"
-  bottom: "Data2"
-  top: "Accuracy1"
+  top: "Softmax1"
 }
