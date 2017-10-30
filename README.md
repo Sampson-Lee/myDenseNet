@@ -12,7 +12,7 @@ BC版本，参考[densenet56_v1](http://ethereon.github.io/netscope/#/gist/524b7
 densenet每次生成的features不多（growrate），而filters的数量只对应features的数量，因此参数很少；另一方面，densenet输入的features由之前层累加，数量很多，在参数更新中，前向传播和后向传播产生的features都要保存，因此占用内存巨大，不过有省内存的版本
 
 # experiments
-论文最佳结果：72.45%
+论文：72.45%，减去总体均值，除以总体标准差， padding=4 再 crop=32
 
 40_v1：减去总体均值，效果最好，71.4%
 
