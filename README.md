@@ -2,6 +2,7 @@
 some research and implenments of DenseNet, thanks for distinguished scholars in github！
 
 ### 网络结构
+
 非BC版本，参考[densenet40_v1](http://ethereon.github.io/netscope/#/gist/40b61cb367e59a79229c2322ef9ad582)
 
 BC版本，参考[densenet56_v1](http://ethereon.github.io/netscope/#/gist/524b7fb49b53258a56de6c537294edbd)
